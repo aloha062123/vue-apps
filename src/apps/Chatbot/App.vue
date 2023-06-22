@@ -2,6 +2,7 @@
   <div>
     <div id="room" class="darkwall" :style="style">
       <div class="titleStyle">{{ title }}</div>
+      <!-- <input v-model="content" type="text" placeholder="Ask something..." class="input" clear> -->
       <input v-model="content" type="text" placeholder="Ask something..." class="input" clear>
       <div class="button-block">
         <button type="button" @click="askAi" class="btn">
@@ -61,6 +62,12 @@ const BTN_TEXT = 'Submit 🚀'
 const res = ref('✅ The answer will be displayed here.')
 const btnText = ref(BTN_TEXT)
 
+const askAi = () => {
+  res.value = content.value; // Display the user's input in the answer section
+  content.value = ''; // Clear the input field
+  btnText.value = BTN_TEXT; // Reset the button text
+}
+
 // console.log(import.meta.env)
 // const http = axios.create({
 //   baseURL: 'https://api.openai.com/v1/chat',
@@ -114,4 +121,4 @@ const btnText = ref(BTN_TEXT)
 //       btnText.value = BTN_TEXT;
 //     });
 // };
-// </script>
+</script>

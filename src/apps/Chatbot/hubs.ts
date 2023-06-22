@@ -3,9 +3,15 @@ import HubsAppProto from "../HubsApp";
 
 class HubsApp extends HubsAppProto {
 
+    // constructor (params: any = {}) {
+    //     super(App, 400, 225, params);
+    //     this.isInteractive = true;
+
+    // }
+
     constructor (width: number, height: number, public params: any = {}) {
         super(App, width, height, params)
-        //  this.isInteractive = true;
+         this.isInteractive = true;
     }
 
     // change the label of the node
