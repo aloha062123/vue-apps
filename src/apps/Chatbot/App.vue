@@ -2,7 +2,6 @@
   <div>
     <div id="room" class="darkwall" :style="style">
       <div class="titleStyle">{{ title }}</div>
-      <!-- <input v-model="content" type="text" placeholder="Ask something..." class="input" clear> -->
       <input v-model="content" type="text" placeholder="Ask something..." class="input" clear>
       <div class="button-block">
         <button type="button" @click="askAi" class="btn">
@@ -15,8 +14,8 @@
             <div class="circle"></div>
           </div>
         </button>
+        <button type="button" @click="startSpeechToText" class="btn">Start Speaking</button>
         <button xr-layer @click="shared.increment">count is: {{ shared.state.count }}</button>
-
       </div>
       <div class="card">
         <pre class="answer">{{ res }}</pre>
@@ -44,15 +43,10 @@
 </style>
 
 <script setup>
-import { ref, inject } from 'vue'
+import { ref, inject, onMounted, onUnmounted } from 'vue'
 import Title from '../../components/CenterTitle.vue'
-// import axios from 'axios'
-// import * as request from 'superagent';
-
-
 import '../../assets/top.css'
 import '../../assets/room.css'
-
 
 let params = inject('params')
 var title = params && params.text ? params.text : 'Soobin_v1 Testing...'
@@ -67,65 +61,43 @@ const res = ref('✅ The answer will be displayed here.')
 const btnText = ref(BTN_TEXT)
 
 const askAi = () => {
-  res.value = 'What is Reality Media?';
-  //content.value; // Display the user's input in the answer section
-  //content.value = ''; // Clear the input field
+  res.value = content.value;
   btnText.value = BTN_TEXT; // Reset the button text
 }
 
+let recognition;
+onMounted(() => {
+    if ('SpeechRecognition' in window) {
+        recognition = new window.SpeechRecognition();
+        recognition.lang = 'en-US';
 
+        recognition.onstart = function() {
+            console.log('SpeechRecognition has started');
+        };
 
-// console.log(import.meta.env)
-// const http = axios.create({
-//   baseURL: 'https://api.openai.com/v1/chat',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     Authorization: `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`,
-//     'OpenAI-Organization': import.meta.env.VITE_ORG_ID,
-//   }
-// })
+        recognition.onend = function() {
+            console.log('SpeechRecognition has ended');
+        };
 
-// const askAi = () => {
-//   btnText.value = 'Thinking...🤔'
-//   http
-//     .post('/completions', {
-//       model: 'gpt-3.5-turbo',
-//       messages: [{ role: 'user', content: content.value }],
-//       temperature: 0.7
-//     })
-//     .then(function(response) {
-//       console.log(response)
-//       res.value = response.data.choices[0].message.content
-//     })
-//     .catch(function(error) {
-//       console.log(error)
-//     })
-//     .finally(() => {
-//       btnText.value = BTN_TEXT
-//     })
-// }
+        recognition.onresult = function(event) {
+            let lastResultIndex = event.results.length - 1;
+            let text = event.results[lastResultIndex][0].transcript;
+            content.value = text;
+        };
+    } else {
+        console.log('SpeechRecognition is not supported in this browser');
+    }
+});
 
-// const askAi = () => {
-//   btnText.value = 'Thinking...🤔';
-//   request
-//     .post('https://api.openai.com/v1/chat/completions')
-//     .set('Content-Type', 'application/json')
-//     .set('Authorization', `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`)
-//     .set('OpenAI-Organization', import.meta.env.VITE_ORG_ID)
-//     .send({
-//       model: 'gpt-3.5-turbo',
-//       messages: [{ role: 'user', content: content.value }],
-//       temperature: 0.7,
-//     })
-//     .then((response) => {
-//       console.log(response);
-//       res.value = response.body.choices[0].message.content;
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     })
-//     .finally(() => {
-//       btnText.value = BTN_TEXT;
-//     });
-// };
+onUnmounted(() => {
+    if (recognition) {
+        recognition.stop();
+    }
+});
+
+const startSpeechToText = () => {
+    if (recognition) {
+        recognition.start();
+    }
+};
 </script>
