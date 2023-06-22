@@ -1,4 +1,19 @@
 
+.card[data-v-8f8d6f9c] {
+  height: 600px;
+  max-height: 200px; /* Adjust the maximum height as needed */
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.answer[data-v-8f8d6f9c] {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 0.5em; /* Adjust the font size as needed */
+}
+
 #edit[data-v-08f6e824] {
   color: #bea7d1;
 }

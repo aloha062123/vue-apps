@@ -572,3 +572,18 @@ outline: #333 solid 4px;
   font-size: 16px;
   padding: 16px 32px;
 }
+
+.card[data-v-bf2d203c] {
+  height: 600px;
+  max-height: 200px; /* Adjust the maximum height as needed */
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.answer[data-v-bf2d203c] {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 0.5em; /* Adjust the font size as needed */
+}
