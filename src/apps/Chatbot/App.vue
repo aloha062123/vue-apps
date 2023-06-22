@@ -3,7 +3,9 @@
     <div id="room" class="darkwall" :style="style">
       <div class="titleStyle">{{ title }}</div>
       <!-- <input v-model="content" type="text" placeholder="Ask something..." class="input" clear> -->
-      <input v-model="content" type="text" placeholder="Ask something..." class="input" clear>
+      <!-- <input v-model="content" type="text" placeholder="Ask something..." class="input" clear> -->
+      <input type="text" placeholder="Ask something..." class="input" ref="inputField" clear>
+
       <div class="button-block">
         <button type="button" @click="askAi" class="btn">
           <strong>{{ btnText }}</strong>
@@ -62,9 +64,20 @@ const BTN_TEXT = 'Submit 🚀'
 const res = ref('✅ The answer will be displayed here.')
 const btnText = ref(BTN_TEXT)
 
+// const askAi = () => {
+//   res.value = content.value; // Display the user's input in the answer section
+//   //content.value = ''; // Clear the input field
+//   btnText.value = BTN_TEXT; // Reset the button text
+// }
+
 const askAi = () => {
-  res.value = content.value; // Display the user's input in the answer section
-  //content.value = ''; // Clear the input field
+  const inputField = refs.inputField;
+  const userInput = inputField.value; // Get the user's input from the input field
+
+  // Emit a custom event named 'user-input' along with the user's input
+  app.emit('user-input', userInput);
+
+  inputField.value = ''; // Clear the input field
   btnText.value = BTN_TEXT; // Reset the button text
 }
 
