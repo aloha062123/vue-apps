@@ -75,7 +75,7 @@ const btnText = ref(BTN_TEXT)
 
 
 
-console.log(import.meta.env)
+//console.log(import.meta.env)
 // const http = axios.create({
 //   baseURL: 'https://api.openai.com/v1/chat',
 //   headers: {
@@ -86,31 +86,31 @@ console.log(import.meta.env)
 // })
 
 const askAi = () => {
-  btnText.value = 'Thinking...🤔'
-  fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`,
-      'OpenAI-Organization': import.meta.env.VITE_ORG_ID,
-    },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: content.value }],
-      temperature: 0.7
-    })
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      res.value = data.choices[0].message.content
-    })
-    .catch(function(error) {
-      console.log(error)
-    })
-    .finally(() => {
-      btnText.value = BTN_TEXT
-    })
+  // btnText.value = 'Thinking...🤔'
+  // fetch('https://api.openai.com/v1/chat/completions', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`,
+  //     'OpenAI-Organization': import.meta.env.VITE_ORG_ID,
+  //   },
+  //   body: JSON.stringify({
+  //     model: 'gpt-3.5-turbo',
+  //     messages: [{ role: 'user', content: content.value }],
+  //     temperature: 0.7
+  //   })
+  // })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     console.log(data)
+  //     res.value = data.choices[0].message.content
+  //   })
+  //   .catch(function(error) {
+  //     console.log(error)
+  //   })
+  //   .finally(() => {
+  //     btnText.value = BTN_TEXT
+  //   })
 }
 
 // const askAi = () => {
