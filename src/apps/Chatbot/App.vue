@@ -1,0 +1,117 @@
+<template>
+  <div>
+    <div id="room" class="darkwall" :style="style">
+      <div class="titleStyle">{{ title }}</div>
+      <input v-model="content" type="text" placeholder="Ask something..." class="input" clear>
+      <div class="button-block">
+        <button type="button" @click="askAi" class="btn">
+          <strong>{{ btnText }}</strong>
+          <div id="container-stars">
+            <div id="stars"></div>
+          </div>
+          <div id="glow">
+            <div class="circle"></div>
+            <div class="circle"></div>
+          </div>
+        </button>
+      </div>
+      <div class="card">
+        <pre class="answer">{{ res }}</pre>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.card {
+  height: 600px;
+  max-height: 200px; /* Adjust the maximum height as needed */
+  overflow: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.answer {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 0.5em; /* Adjust the font size as needed */
+}
+</style>
+
+<script setup>
+import { ref, inject } from 'vue'
+import Title from '../../components/CenterTitle.vue'
+// import axios from 'axios'
+// import * as request from 'superagent';
+
+
+import '../../assets/top.css'
+import '../../assets/room.css'
+
+let params = inject('params')
+var title = params && params.text ? params.text : 'Soobin_v1 Testing...'
+var color = params && params.color ? 'color: ' + params.color + ';' : 'color: green;'
+var size = params && params.size ? 'font-size: ' + params.size + 'em;' : 'font-size: 2em;'
+var style = color + size + 'white-space: nowrap;'
+
+const content = ref('')
+const BTN_TEXT = 'Submit 🚀'
+const res = ref('✅ The answer will be displayed here.')
+const btnText = ref(BTN_TEXT)
+
+// console.log(import.meta.env)
+// const http = axios.create({
+//   baseURL: 'https://api.openai.com/v1/chat',
+//   headers: {
+//     'Content-Type': 'application/json',
+//     Authorization: `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`,
+//     'OpenAI-Organization': import.meta.env.VITE_ORG_ID,
+//   }
+// })
+
+// const askAi = () => {
+//   btnText.value = 'Thinking...🤔'
+//   http
+//     .post('/completions', {
+//       model: 'gpt-3.5-turbo',
+//       messages: [{ role: 'user', content: content.value }],
+//       temperature: 0.7
+//     })
+//     .then(function(response) {
+//       console.log(response)
+//       res.value = response.data.choices[0].message.content
+//     })
+//     .catch(function(error) {
+//       console.log(error)
+//     })
+//     .finally(() => {
+//       btnText.value = BTN_TEXT
+//     })
+// }
+
+// const askAi = () => {
+//   btnText.value = 'Thinking...🤔';
+//   request
+//     .post('https://api.openai.com/v1/chat/completions')
+//     .set('Content-Type', 'application/json')
+//     .set('Authorization', `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`)
+//     .set('OpenAI-Organization', import.meta.env.VITE_ORG_ID)
+//     .send({
+//       model: 'gpt-3.5-turbo',
+//       messages: [{ role: 'user', content: content.value }],
+//       temperature: 0.7,
+//     })
+//     .then((response) => {
+//       console.log(response);
+//       res.value = response.body.choices[0].message.content;
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     })
+//     .finally(() => {
+//       btnText.value = BTN_TEXT;
+//     });
+// };
+// </script>
