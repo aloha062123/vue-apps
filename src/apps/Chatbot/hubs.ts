@@ -1,11 +1,11 @@
 import App from "./App.vue";
 import HubsAppProto from "../HubsApp";
-import {data as SharedData, Store} from "./shared"
+//import {data as SharedData, Store} from "./shared"
 
 
 class HubsApp extends HubsAppProto {
 
-    shared: Store
+    //shared: Store
 
 
     // constructor (params: any = {}) {
@@ -20,8 +20,8 @@ class HubsApp extends HubsAppProto {
 
         // create our shared data object that will
         // share data between vue and hubs
-        this.shared = new Store(this)
-        this.vueApp.provide('shared', this.shared)
+        //this.shared = new Store(this)
+        //this.vueApp.provide('shared', this.shared)
 
         this.isInteractive = true;
         this.isNetworked = true;
@@ -39,14 +39,14 @@ class HubsApp extends HubsAppProto {
         return this.waitForReady()
     }
 
-    updateSharedData(dataObject: SharedData) {
-        super.updateSharedData(dataObject)
-        this.shared.updateSharedData(dataObject)
-    }
+    // updateSharedData(dataObject: SharedData) {
+    //     super.updateSharedData(dataObject)
+    //     this.shared.updateSharedData(dataObject)
+    // }
 
-    getSharedData() {
-        return this.shared.state;
-    }
+    // getSharedData() {
+    //     return this.shared.state;
+    // }
 }
 
 var init = function(params: any = {}) {
