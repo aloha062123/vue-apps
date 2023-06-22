@@ -64,7 +64,7 @@ const btnText = ref(BTN_TEXT)
 
 const askAi = () => {
   res.value = content.value; // Display the user's input in the answer section
-  content.value = ''; // Clear the input field
+  //content.value = ''; // Clear the input field
   btnText.value = BTN_TEXT; // Reset the button text
 }
 
