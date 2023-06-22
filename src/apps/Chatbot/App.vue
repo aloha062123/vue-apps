@@ -56,20 +56,20 @@ var color = params && params.color ? 'color: ' + params.color + ';' : 'color: gr
 var size = params && params.size ? 'font-size: ' + params.size + 'em;' : 'font-size: 2em;'
 var style = color + size + 'white-space: nowrap;'
 
-// const content = ref('')
-// const BTN_TEXT = 'Submit 🚀'
-// const res = ref('✅ The answer will be displayed here.')
-// const btnText = ref(BTN_TEXT)
+const content = ref('')
+const BTN_TEXT = 'Submit 🚀'
+const res = ref('✅ The answer will be displayed here.')
+const btnText = ref(BTN_TEXT)
 
-// console.log(import.meta.env)
-// const http = axios.create({
-//   baseURL: 'https://api.openai.com/v1/chat',
-//   headers: {
-//     'Content-Type': 'application/json',
-//     Authorization: `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`,
-//     'OpenAI-Organization': import.meta.env.VITE_ORG_ID,
-//   }
-// })
+console.log(import.meta.env)
+const http = axios.create({
+  baseURL: 'https://api.openai.com/v1/chat',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${import.meta.env.VITE_OPEN_API_KEY}`,
+    'OpenAI-Organization': import.meta.env.VITE_ORG_ID,
+  }
+})
 
 // const askAi = () => {
 //   btnText.value = 'Thinking...🤔'
