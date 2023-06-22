@@ -15,6 +15,8 @@
             <div class="circle"></div>
           </div>
         </button>
+        <button xr-layer @click="shared.increment">count is: {{ shared.state.count }}</button>
+
       </div>
       <div class="card">
         <pre class="answer">{{ res }}</pre>
@@ -51,12 +53,14 @@ import Title from '../../components/CenterTitle.vue'
 import '../../assets/top.css'
 import '../../assets/room.css'
 
+
 let params = inject('params')
 var title = params && params.text ? params.text : 'Soobin_v1 Testing...'
 var color = params && params.color ? 'color: ' + params.color + ';' : 'color: green;'
 var size = params && params.size ? 'font-size: ' + params.size + 'em;' : 'font-size: 2em;'
 var style = color + size + 'white-space: nowrap;'
 
+const shared = inject('shared')
 const content = ref('What is Reality Media?')
 const BTN_TEXT = 'Submit 🚀'
 const res = ref('✅ The answer will be displayed here.')
