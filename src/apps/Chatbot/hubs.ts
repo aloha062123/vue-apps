@@ -12,19 +12,8 @@ class HubsApp extends HubsAppProto {
     constructor (width: number, height: number, public params: any = {}) {
         super(App, width, height, params)
          this.isInteractive = true;
-
-         this.vueApp.provide('app', this);
-
-         // Listen for the 'user-input' event emitted from the Vue app
-         this.vueApp.config.globalProperties.$on('user-input', (input) => {
-           this.updateAnswer(input);
-         });
+         
     }
-
-    updateAnswer(input: string) {
-        const answer = '✅ User input: ' + input;
-        this.vueApp.config.globalProperties.$refs.app.res = answer;
-      }
 
     // change the label of the node
     async setLabel(text: string, color: string) {
